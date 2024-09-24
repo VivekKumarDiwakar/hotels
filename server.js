@@ -2,12 +2,15 @@ const express = require('express')
 const app = express();
 const db = require('./db');
 const passport = require('./auth');
+require('dotenv').config();
 
 
 // const MenuItems = require('./models/MenuItems');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());// req.body
+const PORT = process.env.PORT || PORT;
+
 
 // Middleware Function
 const logRequest = (req , res , next) => {
@@ -32,6 +35,7 @@ app.get('/',function (req, res) {
    //use the routers with authentication
    app.use('/person' , localAuthMiddleware, personRoutes);
    app.use('/MenuItems' , MenuRoutes);
+
     
 
    app.listen(3000 , ()=> {
